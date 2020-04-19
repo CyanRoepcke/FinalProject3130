@@ -4,6 +4,7 @@ import sys
 
 import numpy as np
 import random
+from random import choices
 
 class Animal:
 
@@ -160,7 +161,9 @@ class Rabbit(Animal):
 
     lifeSpan = 84 # 7 years
     probRepro = 0.5
-    litter = 1                                     # Edit this value?
+    litter = 14
+    litterSize = list(range(1,litter+1))
+    weight = [0.024, 0.04, 0.05, 0.1, 0.15, 0.2, 0.15, 0.1, 0.05, 0.04, 0.024, 0.024, 0.024, 0.024]
     species = 'Rabbit'
     eatMush = False
 
@@ -182,7 +185,7 @@ class Rabbit(Animal):
         if together:
             if self.mated == False and rabbit.mated == False:
                 if ((np.random.rand() < self.probRepro)):
-                    for i in range(0, self.litter):
+                    for i in range(0, choices(self.litterSize, self.weight)[0]):
                         self.reproduce(animalArray, rabbit)
                     self.reproduced(rabbit)
                     return True
@@ -217,7 +220,9 @@ class Fox(Animal):
 
     lifeSpan = 168 # 14 years
     probRepro = 0.3
-    litter = 1                                         # Edit this value?
+    litter = 11
+    litterSize = list(range(1,litter+1))
+    weight = [0.02, 0.02, 0.06, 0.1, 0.15, 0.3, 0.15, 0.1, 0.06, 0.02, 0.02]
     species = 'Fox'
     matedLast = 0
 
@@ -252,7 +257,7 @@ class Fox(Animal):
         if together:
             if self.mated == False and fox.mated == False:
                 if ((np.random.rand() < self.probRepro)):
-                    for i in range(0, self.litter):
+                    for i in range(0, choices(self.litterSize, self.weight)[0]):
                         self.reproduce(animalArray, fox)
                     self.reproduced(fox)
                     return True
